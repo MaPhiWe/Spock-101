@@ -1,9 +1,10 @@
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@SuppressWarnings("GroovyAssignabilityCheck")
 class H_Where extends Specification {
 
-    void "number is even"() {
+    void "number is even"(int dataElements) {
         expect:
         dataElements % 2 == 0
 
@@ -12,7 +13,7 @@ class H_Where extends Specification {
 
     }
 
-    void "String is of correct length"() {
+    void "String is of correct length"(String myString, int myLength) {
         expect:
         myString.length() == myLength
 
@@ -25,7 +26,7 @@ class H_Where extends Specification {
         return [5, 5]
     }
 
-    void "Addition works as expected"() {
+    void "Addition works as expected"(int a, int b, int c) {
         expect:
         a + b == c
 
@@ -36,7 +37,7 @@ class H_Where extends Specification {
     }
 
     @Unroll
-    void "#a + #b equals #c"() {
+    void "#a + #b equals #c"(int a, int b, Number c) {
         expect:
         a + b == c
 
@@ -45,6 +46,7 @@ class H_Where extends Specification {
         1 | 1
         4 | 5
 
+        //noinspection GroovyUnusedAssignment
         c = a.plus(b)
     }
 }
