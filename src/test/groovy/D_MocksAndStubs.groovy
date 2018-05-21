@@ -51,12 +51,21 @@ class D_MocksAndStubs extends Specification {
     def "retrieving multiple values"() {
         given:
         Data myData = Mock()
-        3 * myData.retrieve(_) >>> [1, 2, 3]
+        5 * myData.retrieve(_) >>> [1, 2] >> { throw new InternalError() } >> { args -> args.size() } >> { String key -> key.length()}
 
         expect:
         1 == checkData(myData, "key 1")
         2 == checkData(myData, "key 2")
-        3 == checkData(myData, "key 3")
+
+        when:
+        checkData(myData, "key 3")
+
+        then:
+        thrown(InternalError)
+
+        expect:
+        1 == checkData(myData, "key 4")
+        5 == checkData(myData, "key 5")
     }
 
     def "mocking the DataClass"() {
