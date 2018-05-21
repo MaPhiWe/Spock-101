@@ -48,6 +48,17 @@ class D_MocksAndStubs extends Specification {
         5 == checkData(myData, "otherString")
     }
 
+    def "retrieving multiple values"() {
+        given:
+        Data myData = Mock()
+        3 * myData.retrieve(_) >>> [1, 2, 3]
+
+        expect:
+        1 == checkData(myData, "key 1")
+        2 == checkData(myData, "key 2")
+        3 == checkData(myData, "key 3")
+    }
+
     def "mocking the DataClass"() {
         given:
         DataClass dataClass = Mock()
