@@ -25,4 +25,17 @@ class B_Asserts extends Specification {
         throw new IllegalArgumentException()
 
     }
+
+    void "checks in closures don't auto-assert"() {
+        given:
+        Map myMap = [a:1, b:2]
+        expect:
+        for (i in myMap.keySet()) {
+            myMap.i == 1
+        }
+        myMap.with {
+            a == 2
+            b == 2
+        }
+    }
 }
