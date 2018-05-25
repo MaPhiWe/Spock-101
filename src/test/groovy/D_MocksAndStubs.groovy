@@ -72,8 +72,8 @@ class D_MocksAndStubs extends Specification {
     def "mocking the DataClass"() {
         given:
         DataClass dataClass = Mock()
-        1 * dataClass.retrieve("keyString") >> { 3 }
-        1 * dataClass.retrieve("otherString") >> { 5 }
+        1 * dataClass.retrieve("keyString") >> 3
+        1 * dataClass.retrieve("otherString") >> 5
 
         expect:
         3 == checkData(dataClass, "keyString")
