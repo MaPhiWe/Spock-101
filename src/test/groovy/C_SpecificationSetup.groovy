@@ -1,5 +1,4 @@
-
-
+import spock.lang.PendingFeature
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -15,6 +14,7 @@ class C_SpecificationSetup extends Specification {
         counter == 2
     }
 
+    @PendingFeature
     void "counter is three"() {
         when: "the counter is increased again"
         ++counter
