@@ -12,14 +12,16 @@ class D_MocksAndStubs extends Specification {
         }
     }
 
-    private static int checkData(Data myData, String key) { return myData.retrieve(key) }
+    private static int doubleData(Data myData, String key) {
+        return 2 * myData.retrieve(key)
+    }
 
     def "retrieve is called once"() {
         given:
         def myData = Mock(Data)
 
         when:
-        checkData(myData, "keyString")
+        doubleData(myData, "keyString")
 
         then:
         1 * myData.retrieve(_)
@@ -29,23 +31,23 @@ class D_MocksAndStubs extends Specification {
     def "checkData is working as expected"() {
         given:
         Data myData = Mock()
-        myData.retrieve("keyString") >> { 3 }
-        myData.retrieve("otherString") >> { 5 }
+        myData.retrieve("keyString") >> 3
+        myData.retrieve("otherString") >> 5
 
         expect:
-        3 == checkData(myData, "keyString")
-        5 == checkData(myData, "otherString")
+        6 == doubleData(myData, "keyString")
+        10 == doubleData(myData, "otherString")
     }
 
     def "in and out is working as expected"() {
         given:
         def myData = Mock(Data)
-        1 * myData.retrieve("keyString") >> { 3 }
-        1 * myData.retrieve("otherString") >> { 5 }
+        1 * myData.retrieve("keyString") >> 3
+        1 * myData.retrieve("otherString") >> 5
 
         expect:
-        3 == checkData(myData, "keyString")
-        5 == checkData(myData, "otherString")
+        6 == doubleData(myData, "keyString")
+        10 == doubleData(myData, "otherString")
     }
 
     def "retrieving multiple values"() {
@@ -55,18 +57,18 @@ class D_MocksAndStubs extends Specification {
                                >> { args -> args.size() } >> { String key -> key.length()}
 
         expect:
-        1 == checkData(myData, "key 1")
-        2 == checkData(myData, "key 2")
+        2 == doubleData(myData, "key 1")
+        4 == doubleData(myData, "key 2")
 
         when:
-        checkData(myData, "key 3")
+        doubleData(myData, "key 3")
 
         then:
         thrown(InternalError)
 
         expect:
-        1 == checkData(myData, "key 4")
-        5 == checkData(myData, "key 5")
+        2 == doubleData(myData, "key 4")
+        10 == doubleData(myData, "key 5")
     }
 
     def "mocking the DataClass"() {
@@ -76,7 +78,7 @@ class D_MocksAndStubs extends Specification {
         1 * dataClass.retrieve("otherString") >> 5
 
         expect:
-        3 == checkData(dataClass, "keyString")
-        5 == checkData(dataClass, "otherString")
+        6 == doubleData(dataClass, "keyString")
+        10 == doubleData(dataClass, "otherString")
     }
 }
