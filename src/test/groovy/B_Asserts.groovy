@@ -66,7 +66,21 @@ class B_Asserts extends Specification {
         Map myMap = [a:1, b:2]
 
         expect:
-        myMap.every {k,v -> v == 1}
+        myMap.every { k,v -> v == 1 }
+
+        with(myMap) {
+            a == 2
+            b == 2
+        }
+    }
+
+    @PendingFeature
+    void "and now with better assertion output"() {
+        given:
+        Map myMap = [a:1, b:2]
+
+        expect:
+        myMap.values().every { it == 1 }
 
         with(myMap) {
             a == 2
