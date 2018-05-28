@@ -81,4 +81,15 @@ class D_MocksAndStubs extends Specification {
         6 == doubleData(dataClass, "keyString")
         10 == doubleData(dataClass, "otherString")
     }
-}
+
+    def "mocking DataClass again"() {
+        given:
+        DataClass dataClass = Mock()
+
+        when:
+        doubleData(dataClass, "keyString")
+
+        then:
+        1 * dataClass.retrieve("keyString")
+        0 * _
+    }}
