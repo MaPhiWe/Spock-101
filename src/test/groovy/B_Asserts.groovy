@@ -18,11 +18,14 @@ class B_Asserts extends Specification {
         throwsException()
 
         then:
-        thrown(IllegalArgumentException)
+        def myException = thrown(IllegalArgumentException)
+
+        and:
+        myException.message == "The important message"
     }
 
     private static void throwsException() {
-        throw new IllegalArgumentException()
+        throw new IllegalArgumentException("The important message")
 
     }
 

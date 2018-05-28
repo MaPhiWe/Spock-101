@@ -14,9 +14,4 @@ class E_Old extends Specification {
         then:
         i == old(i) + 1
     }
-
-    private static int increment (int i) {
-        return ++i
-    }
-
 }
