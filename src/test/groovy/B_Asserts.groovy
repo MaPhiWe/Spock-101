@@ -34,7 +34,7 @@ class B_Asserts extends Specification {
         Map myMap = [a:1, b:2]
 
         expect:
-        for (i in myMap.keySet()) {
+        for (i in myMap.values()) {
             myMap.i == 1
         }
 
@@ -50,9 +50,23 @@ class B_Asserts extends Specification {
         Map myMap = [a:1, b:2]
 
         expect:
-        for (i in myMap.keySet()) {
-            assert myMap.i == 1
+        for (i in myMap.values()) {
+            assert i == 1
         }
+
+        with(myMap) {
+            a == 2
+            b == 2
+        }
+    }
+
+    @PendingFeature
+    void "Map operations and Spock with() are even better"() {
+        given:
+        Map myMap = [a:1, b:2]
+
+        expect:
+        myMap.every {k,v -> v == 1}
 
         with(myMap) {
             a == 2
