@@ -6,6 +6,22 @@ import spock.lang.Specification
 
 class F_AutoCleanup extends Specification {
 
+    void setup() {
+        println "Setup"
+    }
+
+    void cleanup() {
+        println "Cleanup"
+    }
+
+    void setupSpec() {
+        println "Setup Spec"
+    }
+
+    void cleanupSpec() {
+        println "Cleanup Spec"
+    }
+
     void "First no-op test to demonstrate AutoCleanup"() {
         expect:
         true
@@ -21,7 +37,7 @@ class F_AutoCleanup extends Specification {
 
     class SomeResource {
         void close() { // Called after each test
-            println("close() has been called")
+            println "close() has been called"
         }
     }
 
@@ -31,7 +47,7 @@ class F_AutoCleanup extends Specification {
 
     class OtherResource {
         void cleanup() { // Called after all tests
-            println("cleanup() has been called")
+            println "cleanup() has been called"
         }
     }
 }
