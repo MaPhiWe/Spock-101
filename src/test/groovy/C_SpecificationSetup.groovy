@@ -22,4 +22,15 @@ class C_SpecificationSetup extends Specification {
         then: "it should be three#"
         counter == 3
     }
+
+    void "counter is two with guard"() {
+        expect:
+        counter == 1
+
+        when: "the counter is increased"
+        ++counter
+
+        then: "it should be two"
+        counter == 2
+    }
 }
