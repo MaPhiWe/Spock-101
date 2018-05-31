@@ -6,7 +6,12 @@ repositories {
 }
 
 dependencies {
+    // Groovy itself
     compile 'org.codehaus.groovy:groovy-all:2.4.15'
+
+    // Spock framework
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+
+    // Code generator for mocking classes (instead of interfaces)
     testCompile 'cglib:cglib-nodep:3.2.6'
 }
