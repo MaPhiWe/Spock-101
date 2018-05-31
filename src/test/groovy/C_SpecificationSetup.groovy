@@ -1,5 +1,4 @@
 import spock.lang.PendingFeature
-import spock.lang.Shared
 import spock.lang.Specification
 
 class C_SpecificationSetup extends Specification {

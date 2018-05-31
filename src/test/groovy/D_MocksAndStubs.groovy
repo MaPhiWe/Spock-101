@@ -92,4 +92,5 @@ class D_MocksAndStubs extends Specification {
         then:
         1 * dataClass.retrieve("keyString")
         0 * _
-    }}
+    }
+}

@@ -1,5 +1,3 @@
-
-
 import spock.lang.Specification
 
 class A_SimpleStart extends Specification {
